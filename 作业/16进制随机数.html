@@ -7,6 +7,40 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <input type="button" value="随机颜色" id="000">
 </body>
+<script>
+    function num(num){
+        var suiji=Math.floor(Math.random()*(num+1))
+        return suiji
+    }
+var col=['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
+var sum =["0"];
+col.forEach(function(e){
+sum+=e
+
+
+})
+var shiliu=[shiliu1=(sum[num(15)]),shiliu2=(sum[num(15)]),shiliu3=(sum[num(15)]),shiliu4=(sum[num(15)]),shiliu5=(sum[num(15)]),shiliu6=(sum[num(15)])]
+var sl="#";
+shiliu.forEach(function(e){
+    sl+=e
+})
+
+
+
+var btn=document.getElementById('000');
+btn.onclick=function(){
+    document.body.style.backgroundColor=sl
+}
+console.log(sl)
+
+
+
+</script>
+
+
+
+
+
 </html>
