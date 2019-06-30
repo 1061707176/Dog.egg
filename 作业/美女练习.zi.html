@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 60%;
+        height: 20%;
+        margin: 100px auto ;    
+    }
+    img{
+        width: 100%;
+    }
+    </style>
+</head>
+<body>
+   <div>
+    <input type="button" value="按钮">
+    <input type="button" value="按钮">
+    <input type="button" value="按钮">
+    <input type="button" value="按钮">
+    <input type="button" value="按钮">
+    <img src="./01.jpg" id='i' alt="">
+   </div>
+</body>
+<script>
+ipt=document.getElementsByTagName('input')
+img=document.getElementById('i')
+for(let i=0;i<ipt.length;i++){
+    ipt[i].onclick=function(){
+        img.src='./0'+(i+1)+'.jpg'
+}
+
+}
+
+</script>
+</html>

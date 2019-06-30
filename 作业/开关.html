@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="天黑请闭眼" id='ii'>
+  
+</body>
+<script>
+let btn=document.getElementById('ii');
+btn.onclick=function(){
+    
+   
+    if(btn.value==='天黑请闭眼'){
+        document.body.style.backgroundColor='#000';
+        btn.value='黎明将至'
+        
+    }
+    else{
+        document.body.style.backgroundColor='#fff'
+        btn.value='天黑请闭眼'
+    }
+}
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+
+        width: 60%;
+        height: 20%;
+        margin: 10% auto;
+    }
+    img{
+        width: 100%;
+    }
+    
+    </style>
+</head>
+<body>
+    <div>
+        <input type="button" value="按钮" data-src="./01.jpg">
+        <input type="button" value="按钮" data-src="./02.jpg">
+        <input type="button" value="按钮" data-src="./03.jpg">
+        <input type="button" value="按钮" data-src="./04.jpg">
+        <input type="button" value="按钮" data-src="./05.jpg">
+        <img src="./01.jpg" alt="">
+
+    </div>
+</body>
+<script>
+let input=document.getElementsByTagName('input');
+let img=document.getElementsByTagName('img');
+for(let i=0;i<input.length;i++){
+    input[i].onclick=function(){
+        src=this.dataset.src;
+        img[0].src=src;
+    }
+}
+
+
+
+
+</script>
+</html>
