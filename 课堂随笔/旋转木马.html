@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>旋转木马轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    ul {
+      list-style: none
+    }
+
+    img {
+      border: 0;
+      vertical-align: top;
+    }
+
+    a,
+    button {
+      cursor: pointer;
+    }
+
+    .wrap {
+      width: 1200px;
+      margin: 100px auto;
+    }
+
+    .slide {
+      height: 500px;
+      position: relative;
+    }
+
+    .slide li {
+      position: absolute;
+      left: 200px;
+      top: 0;
+      transition: all 350ms;
+    }
+
+    .slide li img {
+      width: 100%;
+    }
+
+    .prev,
+    .next {
+      width: 76px;
+      height: 112px;
+      position: absolute;
+      top: 50%;
+      margin-top: -56px;
+      background: url(./images/prev.png) no-repeat;
+      z-index: 99;
+    }
+
+    .next {
+      right: 0;
+      background-image: url(./images/next.png);
+    }
+
+    .slide li.left1 {
+      width: 400px;
+      top: 20px;
+      left: 50px;
+      opacity: 0.2;
+      z-index: 2;
+    }
+
+    .slide li.left2 {
+      width: 600px;
+      top: 70px;
+      left: 0px;
+      opacity: 0.8;
+      z-index: 3;
+    }
+
+    .slide li.middle {
+      width: 800px;
+      top: 100px;
+      left: 200px;
+      opacity: 1;
+      z-index: 4;
+    }
+
+    .slide li.right2 {
+      width: 600px;
+      top: 70px;
+      left: 600px;
+      opacity: 0.8;
+      z-index: 3;
+    }
+
+    .slide li.right1 {
+      width: 400px;
+      top: 20px;
+      left: 750px;
+      opacity: 0.2;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+      <ul>
+        <li>
+          <a href="#"><img src="images/slidepic1.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/slidepic2.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/slidepic3.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/slidepic4.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/slidepic5.jpg" alt="" /></a>
+        </li>
+      </ul>
+      <div class="arrow" id="arrow">
+        <a href="javascript:;" class="prev" id="arrLeft"></a>
+        <a href="javascript:;" class="next" id="arrRight"></a>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+let classname=['left1','left2','middle','right2','right1']//获取样式并且用一个数组存起来
+window.onload=function(){
+    let lis=document.querySelectorAll('.slide li')//获取每一个li
+    lis.forEach((e,i)=>{
+        //遍历设置每一个i的类名
+        e.className=classname[i]
+    })
+    let rbtn=document.querySelector('#arrRight')//获取按钮
+    rbtn.onclick=function(){//按钮注册点击事件
+    let ft=classname.shift()//将第一个类名取出来
+    classname.push(ft);//放到数组最后面
+    lis.forEach((e,i)=>{
+        e.className=classname[i]//按照操作后的数组进行重新排列
+    })
+    
+
+    }
+    let lbtn=document.querySelector('#arrLeft')//获取左按钮
+    lbtn.onclick=function(){
+        let last=classname.pop()//取出数组最后一个值赋予last变量
+        classname.unshift(last)//把取出来的数据放到最前面
+        lis.forEach((e,i)=>{
+            e.className=classname[i]
+        })
+    }
+}
+</script>
+</html>
