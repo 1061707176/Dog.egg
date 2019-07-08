@@ -72,14 +72,40 @@ let small=document.querySelector('.small');//获取图片的父元素盒子
 let mask=document.querySelector('.mask')//黄色滴小框框
 let big= document.querySelector('.big');//放大的图片
 let box=document.querySelector('.box')//所有元素的父盒子(大概)
+let bigImg=document.querySelector('.big>img')
 small.onmouseover=function(){//注册鼠标移入事件
 mask.style.display='block';//鼠标移入的时候让该元素显示
 big.style.display='block';//鼠标移入的时候让该元素显示
 
 } 
 small.onmouseout=function(){
-    mask.style.display='none'
-    big.style.display='none'
+    mask.style.display='none'//鼠标移出隐藏该元素
+    big.style.display='none'//鼠标移出隐藏该元素
+
+}
+small.onmousemove=function(e){
+    let x=e.pageX;//得到鼠标坐标
+    let y=e.pageY;//得到鼠标坐标
+    let offsetLeft=box.offsetLeft//得到盒子距离父盒子左边的距离
+    let offsetTop=box.offsetTop;//得到盒子距离父盒子顶部的距离
+    let hw=mask.offsetWidth/2//黄色小盒子宽度的一半
+    let hh=mask.offsetHeight/2//黄色小盒子高度的一半
+    let maskX=x-offsetLeft-hw;//鼠标的距离页面左边的位置减去box距离页面左边的长度减去黄色小盒子本身宽度的一半
+    let maskY=y-offsetTop-hh;//鼠标的距离页面上边的位置减去box距离页面上边的长度减去黄色小盒子本身高度的一半
+    maskX=maskX < 0 ? 0 : maskX;//如果maskX小于0的话让maskX等于0,为了不让他出框
+    maskY=maskY < 0 ? 0 : maskY//如果maskY小于0的话让maskX等于0,为了不让他出框
+    let zuidaX=small.offsetWidth-mask.offsetWidth;//把包裹内容的盒子的宽度减去黄色小框框的宽度
+    let zuidaY=small.offsetHeight-mask.offsetHeight;//把包裹内容的盒子的宽度减去黄色小框框的高度
+    maskX=maskX>zuidaX?zuidaX:maskX;//如果maskX大于zuidaX则zuidaX赋予maskX
+    maskY=maskY>zuidaY?zuidaY:maskY;//如果maskY大于zuidaY则zuidaY赋予maskY
+    mask.style.top=maskY+'px'//修改样式,让黄色小框可以动起来根据定位
+    mask.style.left=maskX+'px'//修改样式,让黄色小框可以动起来根据定位
+    let datuzuidaX=bigImg.offsetWidth-big.offsetWidth;//大图的宽度减去大图盒子宽度
+    let datuzuidaY=bigImg.offsetHeight-big.offsetHeight;//大图的高度减去大图盒子高度
+    let bigImgX=maskX*datuzuidaX/zuidaX//根据公式求出大图对应小图所在位置并赋予bigImgX//遮罩的当前位置 * 大图的最大移动距离 / 遮罩的最大移动距离
+    let bigImgY=maskY*datuzuidaY/zuidaY//根据公式求出大图对应小图所在位置bigImgY//遮罩的当前位置 * 大图的最大移动距离 / 遮罩的最大移动距离
+    bigImg.style.top=-bigImgY+'px'//赋予样式让图片动起来
+    bigImg.style.left=-bigImgX+'px'//赋予样式让图片动起来
 }
 
 
