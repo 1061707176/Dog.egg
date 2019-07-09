@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    header {
+      height: 100px;
+      background-color: yellow;
+    }
+
+    nav {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    nav>ul {
+      display: flex;
+      /* 多了前后的两张 */
+      width: 800%;
+      /* 动画不能一开始就加，如果一开始就加了，会导致我们第一次的切换也是以动画的形式进行的 */
+      /* transition:transform 1s; */
+    }
+
+    li {
+      flex: 1;
+    }
+
+    li img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    main {
+      height: 500px;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    页面的头部
+  </header>
+  <nav>
+    <!-- li*6>a[#]>img[src=./images/$.jpg] -->
+    <!-- 为了实现无缝滚动，把图片列表前后加上1张，前后多了一张，要记得把ul的宽度改成 800% -->
+    <ul>
+      <li><a href="#"><img src="./images/6.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/1.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/2.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/3.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/4.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/5.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/6.jpg" alt=""></a></li>
+      <li><a href="#"><img src="./images/1.jpg" alt=""></a></li>
+    </ul>
+  </nav>
+  <main>
+    其他布局
+  </main>
+</body>
+<script src="./zepto.js"></script>
+<script src="./touch.js"></script>
+<script>
+let ul=$('nav>ul');//会按照数组的方式找到ul,此时ul就是ul[0];zepto类库的特征
+let imgw=$('nav').width();//zepto类库查找元素宽度的方式>>因为里面图片宽度是百分百,所以找他的父盒子效果是一样的
+let curr=1;//因为为了实现无缝滚动所以第一张肯定是最后一张,第二张才是第一张所以索引是[1];
+let target=curr*imgw*-1;//因为位移是left的原因所以位移都是负数,所以乘以负一
+ul.css('transform','translate('+target+'px)');//这是给ul设置css样式,zepto的方式
+//现在加动画,因为代码的执行速度非常快所以给个延时不然的话图片会以过度动画的形式从第0张切到第一张
+setTimeout(()=>{
+    ul.css('transition','transform 600ms');
+},10)//延时10毫秒才执行这段代码
+
+ul.on('swipeLeft',function(){//注册左滑动事件,这是zepto封装好的工具,不然滑动很麻烦
+    curr++//每左滑一次curr自增一次,curr对应图片位移的张数,所以导致图片位移
+    let target =curr*imgw*-1;
+    ul.css('transform','translate('+target+'px)');//设置ul的样式,让轮播图位移
+
+})
+ul[0].addEventListener('transitionend',function(){
+    if(curr===ul[0].children.length-1){//如果curr的数值等于ul的子元素长度减一,则设置curr为1,也就是回到第一张
+        
+        curr=1
+        let target=curr*imgw*-1;
+        ul.css('transform','translate('+target+'px)');//设置css样式图片位移
+        //再去掉动画.
+        ul[0].style.transition=''//让动画的内容为空
+       
+    }
+    setTimeout(()=>{
+        ul.css('transition','transform 600ms')//再把动画补回来
+    })
+});
+ul.on('swipeRight',function(){
+    curr--;
+    let target=curr*imgw*-1;
+    ul.css('transform','translate('+target+'px)');
+    ul[0].addEventListener('transitionend',function(){
+        if(curr===0){
+            curr=ul[0].children.length-2;
+            let target=curr*imgw*-1;
+            ul.css('transform','translate('+target+'px)');
+            ul[0].style.transition=''
+
+        }
+        setTimeout(()=>{
+            ul.css('transition','transform 600ms')
+        })
+    })
+
+})
+
+
+
+
+
+</script>
+
+</html>

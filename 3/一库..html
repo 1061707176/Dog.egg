@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>开灯</button>
+    <button>关灯</button>
+</body>
+<script src="./js/jquery-1.12.2.js"></script>
+<script>
+    $(function(){
+        let btn1=$('button').eq(0).on('click',function(){
+            $('body').css('backgroundColor','#fff')
+        })
+       let a= $('button').eq(1).on('click',function(){
+            $('body').css('backgroundColor','#000')
+
+        })
+        console.log(a)
+    })
+</script>
+</html>

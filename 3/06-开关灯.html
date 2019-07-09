@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img {
+            display: block;
+            margin: 10px auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <button>开灯</button>
+    <button>关灯</button>
+</body>
+<script src="./js/jquery-2.2.2.js"></script>
+<script>
+$(function(){
+  // 开关灯 - 获取元素，注册点击事件，修改body的背景颜色
+  let btns = $('button');
+  // console.log(btns);
+  // 根据索引把关灯按钮获取出来
+  // console.log(btns[1]);
+  // btns[1].onclick = function(){}
+  // 把 dom 对象,转换为jq对象
+  // $(DOM对象);
+
+  // $(btns[1]).on('click',function(){
+  //   // console.log(123);
+  //   $("body").css('backgroundColor','#000');
+  // });
+
+
+  // 还有一个稍微简单一点的
+  let btn1 = $('button').eq(1);
+  console.log(btn1);
+  $('button').eq(1).on('click',function(){
+    $("body").css('backgroundColor','#000');
+  });
+
+  // 还有一个方式 - 也可以直接使用伪类选择器
+  // $('button:nth-child(2)').on('click',function(){
+  //   $("body").css('backgroundColor','#000');
+  // });
+
+  let btn2 = $('button:last-child');
+  console.log(btn2)
+
+});
+</script>
+</html>
