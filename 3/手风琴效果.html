@@ -65,11 +65,11 @@
 </body>
 <script src="./js/jquery-2.2.2.js"></script>
 <script>
-$('.menuGroup').on('click',function(){//jq里面获取元素对象的方法JQ对象
-    console.log(111)
-$(this).children('div').css('display','block');//找到jq对象的子元素div,并让其转换为block
-$(this).siblings().children('div').css('display','none');//让这个jq对象的兄弟元素的子元素转换为none
-
+// 思路2:要求点击的是span.找到兄弟元素div,隐藏
+//获取span
+$('.groupTitle').on('click',function(){
+    $(this).siblings().css('display','block');//获取本身的兄弟元素,并且设置其子元素的样式为block
+    $(this).parent().siblings().children('div').css('display','none')//找到自己的父元素,再找到其兄弟元素得的子元素设置样式  
 })
 </script>
 </html>    
