@@ -98,23 +98,15 @@
 </body>
 <script src="./js/jquery-2.2.2.js"></script>
 <script>
-$('.tab-item').on('mouseover',function(){//获取鼠标悬停事件
-    //jq中操作类名
-    /*
-    添加类名
-    jq对象.addclass(多个类名)\
-    移除类名
-    jq对象.removeclass(多个类名);
-    切换类名
-    jq对象.toggleclass(多个类名)
-    
-    
-    */
-   $(this).addClass('active')//为当前对象添加类名
-   $(this).siblings().removeClass('active');//删除所有兄弟元素的类名
-   let index=$(this).index();//获取当前对象对应索引
-   $('.main').eq(index).addClass('selected').siblings().removeClass('selected');//设置类名给选中的对象并且删除其兄弟元素的类名
-   
+$('.tab-item').on('mouseover',function(){//获取分类,注册鼠标移入事件
+$(this).addClass('active');//给当前选中的元素添加css样式
+$(this).siblings().removeClass('active')//移除其兄弟元素所有的'active'样式
+let index=$(this).index()//获取当前元素对象索在的索引位置
+$('.main').eq(index).addClass('selected').siblings().removeClass('selected')//根据选定的元素的索引给当前元素添加样式并且删除其兄弟元素的同一类样式
+
+0
+
+0
 
 })
 

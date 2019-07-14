@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>五角星评分案例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .comment {
+      font-size: 40px;
+      color: red;
+    }
+
+    .comment li {
+      float: left;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+  </ul>
+
+</body>
+<script src="./jquery.js"></script>
+<script>
+  /*
+    效果：
+      1.鼠标移入，鼠标在哪个星星上面，当前的星星和之前的星星都是实心
+      2.鼠标移出，分数回归原来的分数 - 之前有一个分数，鼠标移出，之前的分数和左边都是实心的
+      3.鼠标点击，修改分数
+  */
+  /*
+    效果1的思路：
+      1. 获取元素
+      2. 注册鼠标移入事件
+      3. 遍历从第一个开始，到当前结束，都变成实心的，把当前之后的变成空心的
+  */
+  $(() => {
+    let lis = $('.comment>li');
+    // 效果1: 鼠标移到谁的身上，谁和之前就是实心的
+    lis.on('mouseover', function () {
+      // 当前的元素的索引
+      let index = $(this).index();
+      // 从第一个开始，到当前结束，都变成实心的
+      // for(let i =0; i <lis.length; i++){
+      //   // 如果索引比当前的索引小，就是实心的
+      //   if(i <= index){
+      //     lis.eq(i).text('★');
+      //   }
+      //   // 否则就是空心
+      //   else {
+      //     lis.eq(i).text('☆');
+      //   }
+      // }
+
+      lis.each((i, e) => {
+        // 如果索引比当前的索引小，就是实心的
+        if (i <= index) {
+          $(e).text('★');
+        }
+        // 否则就是空心
+        else {
+          $(e).text('☆');
+        }
+      })
+    })
+
+    // 在外面先声明一个变量，用来表示当前是多少分
+    let score = 0;
+    /* 效果2 */
+    lis.on('mouseout', function () {
+      // 恢复原来的分数
+      lis.each((i, e) => {
+        // 如果离开的时候，就又要从0开始遍历，遍历到当前的分数，如果索引比当前的分数要小，就是实心的
+        if (i < score) {
+          $(e).text('★');
+        }
+        // 否则就是空心的
+        else {
+          $(e).text('☆');
+        }
+      })
+    })
+
+    /*
+      效果3： 点击的时候，修改当前的分数
+    */
+    lis.on('click', function () {
+      // 把当前的索引+1，作为分数
+      score = $(this).index() + 1;
+    })
+
+  });
+
+</script>
+
+</html>

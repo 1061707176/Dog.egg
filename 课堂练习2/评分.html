@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>五角星评分案例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .comment {
+      font-size: 40px;
+      color: red;
+    }
+
+    .comment li {
+      float: left;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+  </ul>
+
+</body>
+<script src="./jquery.js"></script>
+<script>
+$(()=>{
+    let lis=$('.comment>li')//获取jq元素对象
+   lis.on('mouseover',function(){//注册jq对象鼠标移入事件
+       let index=$(this).index()//设置一个索引代表鼠标所指的位置
+    lis.each((i,e)=>{// 遍历所有的li
+        if(i<=index){//判断如果索引的i小于鼠标的索引则将之前的li设置为下面的内容
+            $(e).text('❤')
+        }
+        else{
+            $(e).text('☆')//如果不是就设置为原来的样子
+        }
+    })
+    
+    })
+    //设置一个变量代表现在所在的位置
+    let fen=0
+    lis.on('mouseout',function(){
+        lis.each((i,e)=>{
+            if(i<fen){
+                $(e).text('★')
+            }
+            else{
+                $(e).text('☆')
+            }
+        })
+    })
+    lis.on('click',function(){
+        fen=$(this).index()+1
+
+    })
+})
+
+</script>
+
+</html>
