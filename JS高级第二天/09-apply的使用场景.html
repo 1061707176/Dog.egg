@@ -1,0 +1,70 @@
+
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+/*
+  apply的使用场景
+    1.可以用于借用构造函数实现继承
+*/
+// function Person(name,age){
+//   this.name = name;
+//   this.age = age;
+// }
+// function Student(name,age){
+//   Person.apply(this,[name,age]);
+// }
+// let s1 = new Student('狗剩',3);
+// console.log(s1);
+
+
+// apply的使用2
+// 快速的获取数组中的最大值
+// 求数组中的数字的最大债
+let arr = [99,76,34,120,4];
+// 假设第0个是最大的，依次和其他的元素比较，如果有比他更大，更换最大值
+// let max = arr[0];
+// for(let i = 1; i < arr.length; i++){
+//   if(max < arr[i]){
+//     max = arr[i];
+//   }
+
+
+
+ }
+// console.log(max);
+
+// Math.max()
+// let max = Math.max(99,76,34,120,4);
+// console.log(max);
+// let max = Math.max(arr);
+// console.log(max);
+// Math.max的实现过程
+// function max(){
+//   let m = arguments[0];
+//   for(let i = 1; i < arguments.length; i++){
+//     if(m < arguments[i]){
+//       m = arguments[i]
+//     }
+//   }
+//   return m;
+// }
+
+// 借用Math.max求数组的最大值
+// Math.max里面是和this无关的，所以此时this是谁无所谓的，只需要把数组传递给Math.max即可
+// Math.max(1,2,3,4,5)
+let max = Math.max.apply(null,arr);
+console.log(max);
+
+
+
+</script>
+</html>

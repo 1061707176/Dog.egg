@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+<script>
+//    function abb(name,age,sex,cm){
+//         this.name=name;
+//         this.age=age;
+//         console.log(this)
+//         this.sex=sex;
+//         this.cm=cm
+//     }
+// function acc(name,age,sex,cm,my){
+//     abb.call(this,name,age,sex,cm)
+//     this.my=my
+// }
+// let acd=new acc('小鹿','18岁','女','一米五','一块钱')
+// console.dir(acd)
+
+//     let abc=new abb('小林',18+'岁','women','一米六')
+//     console.log(abc.name,abc.sex,abc.cm,abc.age)
+  let lis=document.querySelectorAll('.box');
+    lis.forEach((e,i)=>{
+        e.innerHTML='<li>'+i+'</li>'
+    })
+    li=Array.prototype.slice.call(lis)
+    console.log(li)
+    
+
+</script>
+</html>
