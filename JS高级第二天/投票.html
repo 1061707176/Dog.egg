@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 900px;
+      margin: 50px auto;
+      display: flex;
+    }
+
+    .cell {
+      flex: 1;
+      text-align: center;
+      margin-right: 10px;
+    }
+    .contain {
+      min-height: 400px;
+    }
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="cell">
+      <div class="contain">
+        <img src="./微信图片_20190711090539.jpg" alt="">
+      </div>
+      <input type="button" value="喜欢她(0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./微信图片_20190711090555.png" alt="">
+      </div>
+      <input type="button" value="喜欢她(0)">
+    </div>
+    <div class="cell">
+      <div class="contain">
+        <img src="./snipaste_20190614_143032.png" alt="">
+      </div>
+      <input type="button" value="喜欢她(0)">
+    </div>
+  </div>
+</body>
+<script>
+
+function fn1(){
+    let tickes=0;//这个是定义投票数的一个变量
+    function fn2(){//设定一个内层函数,用于闭包
+
+        this.value='喜欢他('+ ++tickes+')';//设定实例对象的value属性的值为我需要的值
+        
+    }
+return fn2
+}
+let ii=0
+let btns=document.querySelectorAll('input');//获取元素对象用于注册点击事件;
+btns.forEach(e => {
+    e.onclick=fn1()//相当于给三个元素对象分别注册了点击事件各自独立;
+
+    btns[2].onclick=function(){
+    this.value='喜欢他('+ --ii+')'
+}  
+});
+
+
+</script>
+</html>
