@@ -1,0 +1,146 @@
+<style>
+    @keyframes linear {
+      50% {
+        background-color: #ff00ff;
+      }
+
+      100% {
+        background-color: #00cfff;
+      }
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #e7e7e7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    #app {
+      width: 375px;
+      margin: auto;
+      height: 100vh;
+      background-color: #fff;
+    }
+
+    header {
+      /* height: 36px; */
+      padding: 6px 10px;
+      background-color: #fa0000;
+      animation: linear 10s linear 0s infinite alternate  forwards;
+    }
+
+    input {
+      border: 0;
+      width: 100%;
+      outline: none;
+      border-radius: 20px;
+      height: 30px;
+      text-indent: 16px;
+    }
+
+    li {
+      list-style: none;
+      line-height: 30px;
+      border-bottom: 1px solid #c7c7c7;
+      padding-left: 10px;
+    }
+
+    footer {}
+  </style>
+</head>
+<body>
+  <div id="app">
+      <header>
+        <input id="filter" type="text" placeholder="请输入搜索内容">
+      </header>
+      <div class="content">
+        <li></li>
+        <li></li>
+      </div>
+    </div> 
+</body>
+<script src="./jquery.js"></script>
+
+
+
+
+<script>
+/* 
+  let xhr = new XMLHttpRequest();
+  xhr.open('get','http://127.0.0.1:8080/talkToServer');
+  xhr.send();
+  xhr.onreadystatechange=function(){
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        var res = xhr.responseText;
+        document.write(res);
+      }
+    }
+  }
+*/   
+
+    //  需求： 获取并展示文章内容
+    // 1.创建xmlhttprequest实例
+    var xhr = new XMLHttpRequest();
+    // 2.准备打开一个请求地址
+    xhr.open('get', 'http://127.0.0.1:8080/getArticle');
+    // 3.send发送请求
+    xhr.send();
+    // 4.监听通信状态
+    xhr.onreadystatechange = function(){
+      // 5.判断请求的状态，响应状态
+      if(xhr.readyState === 4 && xhr.status === 200){
+        // console.log(xhr.responseText)
+        // 转换json字符串
+        var res = JSON.parse(xhr.responseText);
+        // 
+        console.log(res);
+        // 获取data数组的每一项的content属性;
+        res.data.forEach(function(item){
+          $('<li>').html(item.content).appendTo($('.content'));
+        })
+      }
+    }
+
+//  需求： 获取并展示文章内容
+$('#filter').on('input',function(){
+//获取输入的内容
+let val = $(this).val();
+
+
+
+
+  // 1.创建xmlhttprequest实例 
+  let xhr = new XMLHttpRequest();  
+  // 2.准备打开一个请求地址open
+  xhr.open('get','http://127.0.0.1:8080/getSearchArticle?search=' + val)
+  // 3.send发送请求.
+  xhr.send()
+  // 4.函数监听通信状态onreadystatechange
+  xhr.onreadystatechange = function(){
+     // 5.判断请求的状态，响应状态status
+    //  console.log(xhr.readyState);
+    if(xhr.readyState === 4 && xhr.status === 200){
+     //6.转换json字符串
+      let res = JSON.parse(xhr.responseText);
+      // 清空旧内容
+      $('.content').html('');
+      //获取data数组的每一项的content属性;
+      res.data.forEach(function(item) {
+        // $('li')选择li标签  $('<li>')创建新的li元素
+        $('<li>').html(item.content).appendTo($('.content'));
+      });
+      
+    }
+  }
+  
+})
+
+
+
+
+  </script>
